@@ -26,15 +26,15 @@ export function decorateWithTiming(fn) {
     const logger = Logger.getInstance();
     const startTime = Date.now();
 
-    const result = await fn(title, stepToRun);
+    try {
+      fn(title, stepToRun);
+    } finally {
+      const endTime = Date.now();
 
-    const endTime = Date.now();
+      const duration = endTime - startTime;
 
-    const duration = endTime - startTime;
-
-    logger.info(`Step "${title}" executed in ${duration} ms`);
-
-    return result;
+      logger.info(`Step "${title}" executed in ${duration} ms`);
+    }
   };
 }
 export { expect } from '@playwright/test';
