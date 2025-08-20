@@ -27,7 +27,7 @@ export function decorateWithTiming(fn) {
     const startTime = Date.now();
 
     try {
-      fn(title, stepToRun);
+      return await fn(title, stepToRun);
     } finally {
       const endTime = Date.now();
 
